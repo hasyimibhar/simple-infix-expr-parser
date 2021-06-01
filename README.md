@@ -48,4 +48,6 @@ $ go run main.go "((-2+3*5)^3^2)/3"
 3534833124
 ```
 
-If `-dot` flag is provided, the abstract syntax tree is output as a dot file.
+If `-dot` flag is provided, the abstract syntax tree is output as a dot file. Example AST for the expression `((-2+3*5)^3^2)/3`:
+
+<img src="ast.png" />
