@@ -2,9 +2,7 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"os"
-	"strconv"
 )
 
 type ASTNode struct {
@@ -66,36 +64,5 @@ func (n *ASTNode) print(f *os.File, i *int) {
 
 	if n.Left != nil && n.Right != nil {
 		f.WriteString(fmt.Sprintf("\t{ rank=same; node_%d -> node_%d [style=invis] }\n", leftId, rightId))
-	}
-}
-
-func (n *ASTNode) Eval() int {
-	switch n.Value {
-	case "+":
-		return n.Left.Eval() + n.Right.Eval()
-
-	case "-":
-		if n.Right != nil {
-			return n.Left.Eval() - n.Right.Eval()
-		} else {
-			// Negation
-			return 0 - n.Left.Eval()
-		}
-
-	case "*":
-		return n.Left.Eval() * n.Right.Eval()
-
-	case "/":
-		return n.Left.Eval() / n.Right.Eval()
-
-	case "^":
-		return int(math.Pow(float64(n.Left.Eval()), float64(n.Right.Eval())))
-
-	case "":
-		return n.Left.Eval()
-
-	default:
-		val, _ := strconv.Atoi(n.Value)
-		return val
 	}
 }
