@@ -1,4 +1,4 @@
-This is a simple LL(1) parser for inflix arithmetic expression, written for educational purposes. It supports:
+This is a simple LL(1) parser for infix arithmetic expression, written for educational purposes. It supports:
 
 - integer literals (`[0-9]+`)
 - operators `+`, `-`, `*`, `/`, and `^` (power of)
