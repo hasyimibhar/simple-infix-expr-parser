@@ -2,11 +2,39 @@ This is a simple LL(1) parser for inflix arithmetic expression. It supports:
 
 - integer literals (`[0-9]+`)
 - operators `+`, `-`, `*`, `/`, and `^` (power of)
+- negation (`1--1`)
 - parantheses
 - operator precedence
 - operator associativity (`^` is right-associative, while the rest are left-associative)
 
-## Usage:
+## Grammar
+
+```
+expr ::= addSubExpr
+
+addSubExpr ::= mulDivExpr addSubExprTail
+
+addSubExprTail ::= ('+' | '-') mulDivExpr addSubExprTail
+                 | empty
+
+mulDivExpr ::= powExpr mulDivExprTail
+
+mulDivExprTail ::= ('*' | '/') powExpr mulDivExprTail
+                 | empty
+
+powExpr ::= parenExpr powExprTail
+          | '-' parenExpr
+
+powExprTail ::= '^' parenExpr powExprTail
+              | empty
+
+parenExpr ::= '(' expr ')'
+            | INTLIT
+
+INTLIT ::= ['0'..'9']+
+```
+
+## Usage
 
 `expr [-dot ast.dot] <expr>`
 
